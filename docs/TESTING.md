@@ -13,6 +13,12 @@ live under `testing/python/`.
 ./testing/python.sh
 ```
 
+Pull-request CI runs every hardware-independent check in this list on Linux
+and macOS: formatting, static analysis, the Go tests under the race detector,
+the Python worker tests, and the direct-ingestion, structured-conversation, and
+fake-model lifecycles. The documentation checks run on Linux. Hardware-dependent
+lifecycles are not run in CI.
+
 Run the complete local suite with:
 
 ```bash

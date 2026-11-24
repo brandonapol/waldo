@@ -21,6 +21,21 @@ jobs:
       - name: Vet
         run: go vet ./...
       - name: Test
-        run: go test ./...
+        run: go test -race ./...
+      - name: Python worker tests
+        run: ./testing/python.sh
       - name: Local ingestion E2E
         run: ./testing/e2e/ingest-direct.sh
+      - name: Structured conversation E2E
+        run: ./testing/e2e/structured-conversation.sh
+      - name: Fake model lifecycle E2E
+        run: ./testing/e2e/model-fake.sh
+
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ripgrep
+        run: command -v rg >/dev/null 2>&1 || { sudo apt-get update && sudo apt-get install -y ripgrep; }
+      - name: Documentation
+        run: ./testing/docs.sh
